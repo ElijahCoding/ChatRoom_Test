@@ -1,6 +1,10 @@
 <template>
     <div class="chat__message">
-        message
+        <strong class="chat__message-user">
+            Elijah
+        </strong>
+        <span class="chat__message-timestamp">2019-01-01</span>
+        <p class="chat__message-body">something</p>
     </div>
 </template>
 

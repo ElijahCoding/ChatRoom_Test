@@ -3,7 +3,18 @@
         <chat-messages></chat-messages>
 
         <form action="#" class="chat__form">
+            <textarea
+                id="body"
+                cols="30"
+                rows="4"
+                class="chat__form-input"
+                v-model="body"
 
+            ></textarea>
+
+            <span class="chat__form-helptext">
+                Hit Return to send or Shift + Return for a new line
+            </span>
         </form>
     </div>
 </template>
@@ -11,7 +22,11 @@
 
 <script>
     export default {
-
+        data () {
+            return {
+                body: null
+            }
+        },
     }
 </script>
 

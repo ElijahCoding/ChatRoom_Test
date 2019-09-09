@@ -44863,7 +44863,35 @@ var render = function() {
     [
       _c("chat-messages"),
       _vm._v(" "),
-      _c("form", { staticClass: "chat__form", attrs: { action: "#" } })
+      _c("form", { staticClass: "chat__form", attrs: { action: "#" } }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.body,
+              expression: "body"
+            }
+          ],
+          staticClass: "chat__form-input",
+          attrs: { id: "body", cols: "30", rows: "4" },
+          domProps: { value: _vm.body },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.body = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "chat__form-helptext" }, [
+          _vm._v(
+            "\n            Hit Return to send or Shift + Return for a new line\n        "
+          )
+        ])
+      ])
     ],
     1
   )
@@ -44895,8 +44923,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            body: null
+        };
+    }
+});
 
 /***/ }),
 /* 59 */
@@ -44904,6 +44949,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -44921,11 +44970,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "chat__message" }, [
-    _vm._v("\n    message\n")
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "chat__message" }, [
+      _c("strong", { staticClass: "chat__message-user" }, [
+        _vm._v("\n        Elijah\n    ")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "chat__message-timestamp" }, [
+        _vm._v("2019-01-01")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "chat__message-body" }, [_vm._v("something")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -44940,6 +45004,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(74)
+}
 var normalizeComponent = __webpack_require__(40)
 /* script */
 var __vue_script__ = __webpack_require__(64)
@@ -44948,7 +45016,7 @@ var __vue_template__ = __webpack_require__(65)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -45035,6 +45103,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -45046,9 +45119,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", [_vm._v("users")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "users" }, [
+      _c("div", { staticClass: "users__header" }, [_vm._v("10 users online")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "users__user" }, [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Elijah")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -45435,6 +45521,46 @@ exports = module.exports = __webpack_require__(46)(false);
 
 // module
 exports.push([module.i, "\n.chat__message {\n  padding: 15px;\n  border-bottom: 1px solid #eee;\n}\n.chat__message--own {\n    background-color: #f0f0f0;\n}\n.chat__message-user {\n    font-weight: 800;\n}\n.chat__message-timestamp {\n    color: #aaa;\n}\n.chat__message-body {\n    margin-bottom: 0;\n    white-space: pre-wrap;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(75);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(68)("611431e8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d0cf548\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Users.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d0cf548\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Users.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(46)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.users {\n  background-color: #fff;\n  border: 1px solid #d3e0e9;\n  border-radius: 3px;\n}\n.users__header {\n    padding: 15px;\n    font-weight: 800;\n    margin: 0;\n}\n.users__user {\n    padding: 0 15px;\n}\n.users__user:last-child {\n      padding-bottom: 15px;\n}\n", ""]);
 
 // exports
 
