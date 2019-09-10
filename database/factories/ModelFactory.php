@@ -22,3 +22,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Chat\Message::class, function (Faker\Generator $faker) {
+    return [
+        'body' => $faker->sentence(5),
+        'user_id' => function () {
+            return factory(App\Models\User::class)->create()->id;
+        }
+    ];
+});
