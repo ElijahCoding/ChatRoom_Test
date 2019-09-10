@@ -6,6 +6,8 @@
 
 
 <script>
+    import Bus from '../../bus'
+    
     export default {
         data () {
             return {
@@ -16,6 +18,17 @@
         mounted () {
             axios.get('/chat/messages').then((response) => {
                 this.messages = response.data
+            });
+
+            Bus.$on('messages.added', (message) => {
+                this.messages.unshift(message);
+
+                if (message.selfOwned) {
+                    this.$refs.messages.scrollTop = 0
+                }
+            })
+            .$on('messages.removed', (message) => {
+                this.removeMessage(message.id);
             });
         }
     }

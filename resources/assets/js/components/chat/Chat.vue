@@ -20,6 +20,9 @@
 </template>
 
 <script>
+    import Bus from '../../bus'
+    import moment from 'moment'
+    
     export default {
         data () {
             return {
@@ -38,9 +41,37 @@
                 }
             },
 
-            send () {
-                console.log(this.body);
+            buildTempMessage () {
+                let tempId = Date.now();
 
+                return {
+                    id: tempId,
+                    body: this.body,
+                    created_at: moment().utc(0).format('YYYY-MM-DD HH:mm:ss'),
+                    selfOwned: true,
+                    user: {
+                        name: Laravel.user.name
+                    }
+                }
+            },
+
+            send () {
+                if (!this.body || this.body.trim() === '') {
+                    return
+                }
+
+                let tempMessage = this.buildTempMessage();
+
+                Bus.$emit('messages.added', tempMessage)
+
+                axios.post('/chat/messages', {
+                    body: this.body.trim()
+                }).catch(() => {
+                    this.body = this.bodyBackedUp
+                    Bus.$emit('messages.removed', tempMessage)
+                })
+
+                this.body = null
             }
         }
     }
