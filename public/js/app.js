@@ -44960,7 +44960,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['message']
+});
 
 /***/ }),
 /* 60 */
@@ -44970,26 +44972,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "chat__message" }, [
+  return _c(
+    "div",
+    {
+      staticClass: "chat__message",
+      class: { "chat__message--own": _vm.message.selfOwned }
+    },
+    [
       _c("strong", { staticClass: "chat__message-user" }, [
-        _vm._v("\n        Elijah\n    ")
+        _vm._v("\n        " + _vm._s(_vm.message.user.name) + "\n    ")
       ]),
       _vm._v(" "),
       _c("span", { staticClass: "chat__message-timestamp" }, [
-        _vm._v("2019-01-01")
+        _vm._v(_vm._s(_vm.message.created_at))
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "chat__message-body" }, [_vm._v("something")])
-    ])
-  }
-]
+      _c("p", { staticClass: "chat__message-body" }, [
+        _vm._v(_vm._s(_vm.message.body))
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -45063,9 +45067,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            messages: []
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get('/chat/messages').then(function (response) {
+            _this.messages = response.data;
+        });
+    }
+});
 
 /***/ }),
 /* 63 */
@@ -45078,7 +45094,12 @@ var render = function() {
   return _c(
     "div",
     { ref: "messages", staticClass: "chat__messages" },
-    [_c("chat-message"), _vm._v(" "), _c("chat-message")],
+    _vm._l(_vm.messages, function(message) {
+      return _c("chat-message", {
+        key: message.id,
+        attrs: { message: message }
+      })
+    }),
     1
   )
 }
