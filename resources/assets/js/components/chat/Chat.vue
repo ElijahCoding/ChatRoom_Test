@@ -9,7 +9,7 @@
                 rows="4"
                 class="chat__form-input"
                 v-model="body"
-
+                @keydown="handleMessageInput"
             ></textarea>
 
             <span class="chat__form-helptext">
@@ -19,14 +19,30 @@
     </div>
 </template>
 
-
 <script>
     export default {
         data () {
             return {
-                body: null
+                body: null,
+                bodyBackedUp: null
             }
         },
+
+        methods: {
+            handleMessageInput (e) {
+                this.bodyBackedUp = this.body
+
+                if (e.keyCode === 13 && !e.shiftKey) {
+                    e.preventDefault();
+                    this.send();
+                }
+            },
+
+            send () {
+                console.log(this.body);
+
+            }
+        }
     }
 </script>
 

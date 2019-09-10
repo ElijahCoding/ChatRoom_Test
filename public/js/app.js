@@ -44877,6 +44877,7 @@ var render = function() {
           attrs: { id: "body", cols: "30", rows: "4" },
           domProps: { value: _vm.body },
           on: {
+            keydown: _vm.handleMessageInput,
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -44933,13 +44934,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            body: null
+            body: null,
+            bodyBackedUp: null
         };
+    },
+
+
+    methods: {
+        handleMessageInput: function handleMessageInput(e) {
+            this.bodyBackedUp = this.body;
+
+            if (e.keyCode === 13 && !e.shiftKey) {
+                e.preventDefault();
+                this.send();
+            }
+        },
+        send: function send() {
+            console.log(this.body);
+        }
     }
 });
 
