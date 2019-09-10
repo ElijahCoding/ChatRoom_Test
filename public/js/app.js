@@ -62400,6 +62400,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).$on('messages.removed', function (message) {
             _this.removeMessage(message.id);
         });
+    },
+
+
+    methods: {
+        removeMessage: function removeMessage(id) {
+            this.messages = this.messages.filter(function (message) {
+                return message.id !== id;
+            });
+        }
     }
 });
 

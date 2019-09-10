@@ -7,7 +7,7 @@
 
 <script>
     import Bus from '../../bus'
-    
+
     export default {
         data () {
             return {
@@ -30,7 +30,15 @@
             .$on('messages.removed', (message) => {
                 this.removeMessage(message.id);
             });
-        }
+        },
+
+        methods: {
+            removeMessage (id) {
+                this.messages = this.messages.filter((message) => {
+                    return message.id !== id;
+                })
+            }
+        },
     }
 </script>
 
