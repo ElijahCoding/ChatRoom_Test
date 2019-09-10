@@ -4,7 +4,6 @@
     </div>
 </template>
 
-
 <script>
     import Bus from '../../bus'
 
@@ -14,7 +13,13 @@
                 messages: []
             }
         },
-
+        methods: {
+            removeMessage (id) {
+                this.messages = this.messages.filter((message) => {
+                    return message.id !== id;
+                })
+            }
+        },
         mounted () {
             axios.get('/chat/messages').then((response) => {
                 this.messages = response.data
@@ -30,15 +35,7 @@
             .$on('messages.removed', (message) => {
                 this.removeMessage(message.id);
             });
-        },
-
-        methods: {
-            removeMessage (id) {
-                this.messages = this.messages.filter((message) => {
-                    return message.id !== id;
-                })
-            }
-        },
+        }
     }
 </script>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ config('app.locale') }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +26,7 @@
                 'pusher' => config('broadcasting.connections.pusher.key')
             ]
         ]) !!};
-    </script>d
+    </script>
 </head>
 <body>
     <div id="app">

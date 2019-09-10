@@ -1,7 +1,6 @@
 <template>
     <div class="chat">
         <chat-messages></chat-messages>
-
         <form action="#" class="chat__form">
             <textarea
                 id="body"
@@ -11,7 +10,6 @@
                 v-model="body"
                 @keydown="handleMessageInput"
             ></textarea>
-
             <span class="chat__form-helptext">
                 Hit Return to send or Shift + Return for a new line
             </span>
@@ -22,7 +20,7 @@
 <script>
     import Bus from '../../bus'
     import moment from 'moment'
-    
+
     export default {
         data () {
             return {
@@ -30,7 +28,6 @@
                 bodyBackedUp: null
             }
         },
-
         methods: {
             handleMessageInput (e) {
                 this.bodyBackedUp = this.body
@@ -40,7 +37,6 @@
                     this.send();
                 }
             },
-
             buildTempMessage () {
                 let tempId = Date.now();
 
@@ -54,7 +50,6 @@
                     }
                 }
             },
-
             send () {
                 if (!this.body || this.body.trim() === '') {
                     return
